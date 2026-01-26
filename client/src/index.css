@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+*{
+  font-family: "Inter", sans-serif;
+}
+
+@theme{
+  --color-primary: #7F00FF
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
