@@ -43,7 +43,7 @@ export const AppContextProvider = ({children}) => {
         fetchUser()
     },[])
 
-        const value = {user, setUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme, fetchUser}
+        const value = {user, setUser, chats, setChats, selectedChat, setSelectedChat, theme, setTheme, fetchUser, navigate}
 
     return(
         <AppContext.Provider value= {value}>

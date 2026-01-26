@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
+import moment from "moment"
 
 function Sidebar() {
-  const { chats, setSelectedChat, theme, setTheme, user } = useAppContext();
+  const { chats, setSelectedChat, theme, setTheme, user, navigate } = useAppContext();
   const { search, setSearch } = useState("");
 
-  console.log(chats)
+  console.log(chats);
 
   return (
     <div className="flex flex-col h-screen min-w-72 p-5 dark:bg-linear-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1">
@@ -35,27 +36,58 @@ function Sidebar() {
       </div>
 
       {/* Recent Chats */}
-{chats.length > 0 && <p className='mt-4 text-sm'>Recent Chats</p>}
-<div className='flex-1 overflow-y-scroll mt-3 text-sm space-y-3'>
-  {
-    chats.filter(chat => (chat.messages?.[0]?.content?.toLowerCase().includes(search?.toLowerCase() || "") || chat.name?.toLowerCase().includes(search?.toLowerCase() || ""))).map(chat => (
-      <div key={chat._id} className='p-2 px-4 dark:bg-[#57317C]/10 border border-gray-300 dark:border-[#80609F]/15 rounded-md cursor-pointer flex justify-between group'>
-        <div>
-          <p className='truncate w-full'>
-            {chat.messages.length > 0 ? chat.messages[0].content.slice(0, 32) : chat.name}
-          </p>
-          <p className='text-xs text-gray-500 dark:text-[#B1A6C0]'>
-            {chat.updatedAt}</p>
-        </div>
-        <img src={assets.bin_icon} className='hidden group-hover:block w-4 cursor-pointer not-dark:invert' alt="" />
+      {chats.length > 0 && <p className="mt-4 text-sm">Recent Chats</p>}
+      <div className="flex-1 overflow-y-scroll mt-3 text-sm space-y-3">
+        {chats
+          .filter(
+            (chat) =>
+              chat.messages?.[0]?.content
+                ?.toLowerCase()
+                .includes(search?.toLowerCase() || "") ||
+              chat.name?.toLowerCase().includes(search?.toLowerCase() || ""),
+          )
+          .map((chat) => (
+            <div
+              key={chat._id}
+              className="p-2 px-4 dark:bg-[#57317C]/10 border border-gray-300 dark:border-[#80609F]/15 rounded-md cursor-pointer flex justify-between group"
+            >
+              <div>
+                <p className="truncate w-full">
+                  {chat.messages.length > 0
+                    ? chat.messages[0].content.slice(0, 32)
+                    : chat.name}
+                </p>
+                <p className="text-xs text-gray-500 dark:text-[#B1A6C0]">
+                  {moment(chat.updatedAt).fromNow()}
+                </p>
+              </div>
+              <img
+                src={assets.bin_icon}
+                className="hidden group-hover:block w-4 cursor-pointer not-dark:invert"
+                alt=""
+              />
+            </div>
+          ))}
       </div>
-    ))
-  }
+
+      {/* Community Images */}
+<div onClick={() => {navigate('/community')}} className='flex items-center gap-2 
+p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer 
+hover:scale-105 transition-all'>
+    <img src={assets.gallery_icon} className='w-4.5 not-dark:invert' alt="" />
+    <div className='flex flex-col text-sm'>
+        <p>Community Images</p>
+    </div>
 </div>
 
-
-
-
+{/* Credit Purchases Option */}
+<div onClick={() => { navigate('/credits') }} className='flex items-center gap-2 p-3 mt-4 border border-gray-300 dark:border-white/15 rounded-md cursor-pointer hover:scale-103 transition-all'>
+  <img src={assets.diamond_icon} className='w-4.5 dark:invert' alt="" />
+  <div className='flex flex-col text-sm'>
+    <p>Credits : {user?.credits}</p>
+    <p className='text-xs text-gray-400'>Purchase credits to use AeraGPT</p>
+  </div>
+</div>
     </div>
   );
 }

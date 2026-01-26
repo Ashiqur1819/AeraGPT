@@ -1,6 +1,5 @@
 import logo from "./logo.png";
-import logo_full from "./logo_full.svg";
-import logo_full_dark from "./logo_full_dark.svg";
+import logo_full_dark from "./logo_full_dark.png";
 import search_icon from "./search_icon.svg";
 import user_icon from "./user_icon.svg";
 import theme_icon from "./theme_icon.svg";
@@ -29,7 +28,6 @@ import ai_image12 from "./ai_image12.jpg";
 
 export const assets = {
     logo,
-    logo_full,
     search_icon,
     user_icon,
     theme_icon,
@@ -101,8 +99,8 @@ export const dummyChats = [
                 "timestamp": 1755178194747,
             }
         ],
-        "createdAt": "2025-08-14T13:29:31.398Z",
-        "updatedAt": "2025-08-14T13:29:54.753Z",
+        "createdAt": "2025-10-14T13:29:31.398Z",
+        "updatedAt": "2025-11-14T13:29:54.753Z",
     },
     {
         "_id": "689ccb9016a922dd57a23fce",
