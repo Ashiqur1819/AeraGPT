@@ -6,6 +6,8 @@ function Sidebar() {
   const { chats, setSelectedChat, theme, setTheme, user } = useAppContext();
   const { search, setSearch } = useState("");
 
+  console.log(chats)
+
   return (
     <div className="flex flex-col h-screen min-w-72 p-5 dark:bg-linear-to-b from-[#242124]/30 to-[#000000]/30 border-r border-[#80609F]/30 backdrop-blur-3xl transition-all duration-500 max-md:absolute left-0 z-1">
       {/* Logo */}
@@ -31,6 +33,29 @@ function Sidebar() {
           className="text-xs placeholder:text-gray-400 outline-none"
         />
       </div>
+
+      {/* Recent Chats */}
+{chats.length > 0 && <p className='mt-4 text-sm'>Recent Chats</p>}
+<div className='flex-1 overflow-y-scroll mt-3 text-sm space-y-3'>
+  {
+    chats.filter(chat => (chat.messages?.[0]?.content?.toLowerCase().includes(search?.toLowerCase() || "") || chat.name?.toLowerCase().includes(search?.toLowerCase() || ""))).map(chat => (
+      <div key={chat._id} className='p-2 px-4 dark:bg-[#57317C]/10 border border-gray-300 dark:border-[#80609F]/15 rounded-md cursor-pointer flex justify-between group'>
+        <div>
+          <p className='truncate w-full'>
+            {chat.messages.length > 0 ? chat.messages[0].content.slice(0, 32) : chat.name}
+          </p>
+          <p className='text-xs text-gray-500 dark:text-[#B1A6C0]'>
+            {chat.updatedAt}</p>
+        </div>
+        <img src={assets.bin_icon} className='hidden group-hover:block w-4 cursor-pointer not-dark:invert' alt="" />
+      </div>
+    ))
+  }
+</div>
+
+
+
+
     </div>
   );
 }
