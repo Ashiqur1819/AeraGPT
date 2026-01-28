@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 import Message from "./Message";
 
 function Chatbox() {
   const { selectedChat, theme } = useAppContext();
+
+  const containerRef = useRef(null)
 
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,10 +25,19 @@ function Chatbox() {
     }
   }, [selectedChat]);
 
+  useEffect(() => {
+    if(containerRef.current){
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: "smooth"
+      })
+    }
+  }, [messages])
+
   return (
     <div className="flex-1 flex flex-col justify-between m-5 md:m-10 max-md:mt-14 2xl:pr-40">
       {/* Chat Messages */}
-      <div className="flex-1 mb-5 overflow-y-scroll">
+      <div ref={containerRef} className="flex-1 mb-5 overflow-y-scroll">
         {messages?.length === 0 && (
           <div className="h-full flex flex-col items-center justify-center gap-2 text-primary">
             <img
