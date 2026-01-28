@@ -1,14 +1,13 @@
 import { assets } from "../assets/assets";
 import moment from "moment";
-import Markdown from "react-markdown"
-import Prism from "prismjs"
+import Markdown from "react-markdown";
+import Prism from "prismjs";
 import { useEffect } from "react";
 
 function Message({ message }) {
-
   useEffect(() => {
-    Prism.highlightAll()
-  }, [message.content])
+    Prism.highlightAll();
+  }, [message.content]);
 
   return (
     <div>
@@ -35,7 +34,9 @@ function Message({ message }) {
               <Markdown>{message.content}</Markdown>
             </div>
           )}
-          <span className="text-xs text-gray-500 dark:text-[#B1A6C0]">{moment(message.timestamp).fromNow()}</span>
+          <span className="text-xs text-gray-500 dark:text-[#B1A6C0]">
+            {moment(message.timestamp).fromNow()}
+          </span>
         </div>
       )}
     </div>
