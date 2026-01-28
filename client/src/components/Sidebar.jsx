@@ -14,7 +14,7 @@ function Sidebar({ isMenuOpen, setIsMenuOpen }) {
     >
       {/* Logo */}
       <img
-        src={theme === "dark" ? assets.logo_full : assets.logo_full_dark}
+        src={theme === "dark" ? assets.logo_full_white : assets.logo_full_dark}
         alt=""
         className="w-full max-w-48"
       />
