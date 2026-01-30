@@ -1,5 +1,5 @@
-import User from "../models/user-model";
-import generateToken from "../utils/generateToken";
+import User from "../models/user-model.js";
+import generateToken from "../utils/generateToken.js";
 import bcrypt from "bcryptjs";
 
 // API to register user
@@ -46,9 +46,9 @@ export const loginUser = async (req, res) => {
 
 
 // Api to get user data
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
    try {
-     const user = req.user
+     const user = await req.user
      return res.json({success: true, user})
    } catch (error) {
         return res.json({ success: false, message: error.message });
