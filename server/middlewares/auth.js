@@ -8,7 +8,9 @@ export const protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.id;
 
-    const user = User.findById(userId);
+    const user = await User.findById(userId);
+
+    console.log(user)
 
     if (!user) {
       return res.json({

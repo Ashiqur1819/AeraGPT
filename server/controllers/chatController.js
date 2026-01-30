@@ -4,7 +4,9 @@ import Chat from "../models/chat-model.js";
 // API controller for creating a new chat
 export const createChat = async (req, res) => {
   try {
-    const userId = req.user._id;
+
+    const userId = req.user._id
+
     const chatData = {
       userId,
       userName: req.user.name,
